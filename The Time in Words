@@ -1,0 +1,76 @@
+# https://www.hackerrank.com/challenges/the-time-in-words
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the timeInWords function below.
+def timeInWords(h, m):
+    numbers = ("zero",
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "nine",
+        "ten",
+        "eleven",
+        "twelve",
+        "thirteen",
+        "fourteen",
+        "fifteen",
+        "sixteen",
+        "seventeen",
+        "eighteen",
+        "nineteen",
+        "twenty",
+        "twenty one",
+        "twenty two",
+        "twenty three",
+        "twenty four",
+        "twenty five",
+        "twenty six",
+        "twenty seven",
+        "twenty eight",
+        "twenty nine",
+        "thirty")
+    
+    if int(m) == 0:
+        return str(numbers[h])+" o\' clock"
+    elif int(m) == 1:
+        conn1 = str(numbers[m])+" "+"minute"
+    elif int(m) > 0 and int(m) != 15 and int(m) != 30 and int(m) != 45 and int(m) < 30:
+        conn1 = str(numbers[m])+" "+"minutes"
+    elif int(m) > 30 and int(m) != 15 and int(m) != 30 and int(m) != 45 and int(m) < 60:
+        conn1 = str(numbers[60-m])+" "+"minutes"
+    elif int(m) == 15 or int(m) == 45:
+        conn1 = "quarter"
+    elif int(m) == 30:
+        conn1 = "half"
+        
+    if int(m) <= 30:
+        conn2 = "past"+" "+str(numbers[h])
+    else:
+        conn2 = "to"+" "+str(numbers[(h+1)%12])
+    
+    return conn1+" "+conn2
+        
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    h = int(input())
+
+    m = int(input())
+
+    result = timeInWords(h, m)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
