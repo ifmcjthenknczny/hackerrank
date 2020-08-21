@@ -1,0 +1,47 @@
+# https://www.hackerrank.com/challenges/encryption/submissions/code/78477723
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the encryption function below.
+def encryption(s):
+    cols = math.ceil(len(s)**(1/2))
+    rows = math.floor(len(s)**(1/2))
+    
+    if len(s) > cols*rows:
+        rows = cols
+        
+    strings = []; encrypted = []
+    
+    for i in range(rows):
+        strings += [s[i*cols:(i+1)*cols]]
+    
+    for letter in range(cols):
+        for string in strings:
+        
+            try:
+                encrypted += string[letter]
+            except:
+                pass
+                
+        encrypted += " "
+        
+    del encrypted[-1]
+    
+    return ''.join(encrypted)
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = encryption(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
